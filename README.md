@@ -5,80 +5,76 @@ An intelligent AI-powered assistant that helps you understand and analyze data m
 ## 🌟 Features
 
 - **PDF Document Processing**: Automatically extracts and processes text from uploaded PDF files
-- **Intelligent Conversations**: Engage in natural dialogue about your data models and documentation
-- **Vector-Based Search**: Uses FAISS for efficient information retrieval
-- **Persistent Knowledge**: Saves processed documents in a vector store for quick future access
-- **User-Friendly Interface**: Clean Streamlit interface for easy interaction
-- **Real-Time Responses**: Get immediate AI-powered responses to your questions
+- **Conversational Interface**: Natural dialogue with context-aware responses
+- **Vector Database**: Uses ChromaDB with OpenAI embeddings for efficient storage/retrieval
+- **Streaming Responses**: Real-time answer generation with typing indicator
+- **Session Persistence**: Maintains conversation history and document context
+- **Debug Tools**: Inspect retrieved document chunks during conversations
 
 ## 🚀 Quick Start
 
-1. **Clone the Repository**
+1. **Clone Repository**
    ```bash
-   git clone <repository-url>
-   cd ask-mr-dm
+   git clone https://github.com/yourusername/pdfrag.git
+   cd pdfrag
    ```
 
-2. **Set Up Environment**
+2. **Install Dependencies**
    ```bash
-   # Create and activate a virtual environment (optional but recommended)
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   
-   # Install dependencies
    pip install -r requirements.txt
    ```
 
-3. **Configure API Key**
-   - Create a `.env` file in the project root
-   - Add your OpenAI API key:
-     ```
-     OPENAI_API_KEY=your_api_key_here
-     ```
+3. **Configure Environment**
+   ```bash
+   echo 'OPENAI_API_KEY="your-api-key-here"' > .env
+   ```
 
-4. **Run the Application**
+4. **Organize PDFs**
+   ```bash
+   mkdir -p data  # Place PDF files here
+   ```
+
+5. **Launch Application**
    ```bash
    streamlit run app.py
    ```
 
-5. **Access the App**
-   - Open your browser and go to `http://localhost:8501`
-   - Start uploading PDFs and asking questions!
-
 ## 📋 Requirements
 
-- Python 3.x
+- Python 3.10+
 - OpenAI API key
-- Required Python packages (installed via requirements.txt):
-  - streamlit
-  - langchain
-  - openai
-  - python-dotenv
-  - PyPDF2
-  - faiss-cpu
-  - certifi
+- PDF documents in `data/` directory
 
-## 💡 How It Works
+## 🔧 Technical Stack
 
-1. **Document Processing**:
-   - Upload PDF documents through the Streamlit interface
-   - The app extracts text and splits it into manageable chunks
-   - Text chunks are converted into vector embeddings using OpenAI's embedding model
+- **Framework**: Streamlit
+- **Language Model**: GPT-4 via OpenAI API
+- **Embeddings**: text-embedding-3-large
+- **Vector Database**: ChromaDB
+- **PDF Processing**: PyPDFDirectoryLoader
 
-2. **Vector Store**:
-   - Embeddings are stored in a FAISS vector store
-   - The vector store is saved locally for persistence
-   - Efficient similarity search enables quick information retrieval
+## 🛠️ Implementation Details
 
-3. **Conversation Chain**:
-   - Uses LangChain's ConversationalRetrievalChain
-   - Maintains conversation context for more natural interactions
-   - Combines retrieved context with OpenAI's language model for accurate responses
+The application follows these key steps:
 
-## 🔒 Security Note
+1. **Document Ingestion**:
+   - Load PDFs from `data/` directory
+   - Split documents into 2000-character chunks
+   - Generate vector embeddings for each chunk
 
-- Never commit your `.env` file or expose your API keys
-- The vector store contains processed text from your documents; ensure you have appropriate permissions
+2. **Vector Storage**:
+   - Store embeddings in ChromaDB with persistent storage
+   - Enable efficient similarity search
+
+3. **Conversation Flow**:
+   - Maintain chat history in session state
+   - Combine retrieved documents with LLM context
+   - Stream responses character-by-character
+
+4. **Error Handling**:
+   - Validate PDF directory existence
+   - Catch and display processing errors
+   - Graceful handling of missing credentials
 
 ## 🤝 Contributing
 
