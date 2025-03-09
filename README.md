@@ -1,4 +1,4 @@
-# Ask Mr. Data Modeler 🤖
+# New Rag Test App 🤖
 
 An intelligent AI-powered assistant that helps you understand and analyze data models through natural conversation. Built with Streamlit and powered by OpenAI's language models.
 
