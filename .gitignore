@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+.env.local
+
+# Virtual Environment
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Chroma DB
+chroma_db/
+data/
+
+# Logs
+*.log
+
+# Local Development
+*.swp
+*.swo
